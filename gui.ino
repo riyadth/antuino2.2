@@ -524,11 +524,19 @@ void doMenu(){
   int i = enc_read();
   
   GLCD.FillRect(0, 0, 127, 63, WHITE);
+#if 0
   GLCD.DrawString("EXIT:", 0, 2);
+#else
+  GLCD.DrawString("PLOT:", 0, 2);
+#endif
   GLCD.DrawString("FREQ:", 0, 15);
   GLCD.DrawString("SPAN:", 0, 28);
   GLCD.DrawString("MODE:", 0, 41);
+#if 0
   GLCD.DrawString("VTVM:", 0, 52);
+#else
+  GLCD.DrawString("Antuino 2.2 - KB7YWE", 0, 52);
+#endif
   uiFreq(0);  
   uiSpan(0);  
   uiPWR(0);
@@ -556,9 +564,17 @@ void doMenu(){
       knob += i;
       //rotate the knob around
       if (knob > 7)
+#if 0
         knob = 0;
-      if (knob < 0)
+#else
         knob = 7;
+#endif
+      if (knob < 0)
+#if 0
+        knob = 7;
+#else
+        knob = 0;
+#endif
     }
     
     if (btnDown()){
@@ -575,6 +591,7 @@ void doMenu(){
       uiMessage(uiFocus, 0);
     }
 
+#if 0
     //experimental dvm
     int dvm = analogRead(A7) * 57;
     if (abs(dvm - prev_dvm) > 100){
@@ -605,6 +622,7 @@ void doMenu(){
      // Serial.print(dvm);Serial.print(" vs ");
       //Serial.println(c);
     }
+#endif
 
   }
   //on every button, save the freq.
